@@ -42,32 +42,6 @@ $scope.updateFriend = function(user_id) {
    $location.path('/friends/' + user_id + '/edit');
  }
 
-/* USERS   + + + + + + + + + + + + + + + + + + + + + + + + + + +  */
-$scope.addUser = function(){
-   //console.log('Friend to be created: ',_this.user);
-   usersFactory.create( $scope.user, function newUserCreatedNowRedirect(newUser){
-      console.log('USER created and recd by new user controller -> redirect coming...', newUser);
-      // console.log('ERRORS CAUGHT READY TO HANDLE: ',newUser);
-      if ( newUser.hasOwnProperty('errors') ) {
-         if ( newUser.hasOwnProperty('users') ) {
-            // came from server-side controller validations
-            alert('Create new user failed!' + newUser.errors.users.message);
-         }else{
-            // came from server-side mongoose model validations
-            // TODO: CREATE A LOOP TO OUTPUT SPECIFIC ERRORS
-            alert('Create new user failed!' + ' Please enter a valid first and last name.');
-         }
-         $location.path("/");
-      }else{
-         $scope.user = {};
-         $location.path("/users/" + newUser._id);
-      }
-   });
-}
-
-
-
-
 
 $scope.deleteUser = function(_id){
    usersFactory.delete(_id, function redirectAfterDelete(data){
