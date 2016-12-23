@@ -1,6 +1,12 @@
 app.controller('sessionController', function($scope, sessionFactory, usersFactory, $location){
-    $scope.cur_user = null;
+   // the logged in user
+   $scope.cur_user = null;
+   // the new user to create from registration form
+   $scope.user = {};
+   // track errors
+   $scope.errors = [];
 
+/* LOCKDOWN + + + + + + + + + + + + + + +  */
     sessionFactory.getCurUser(function(data){
       //console.log('returned to client session controller',data);
       $scope.cur_user = data;
@@ -8,18 +14,13 @@ app.controller('sessionController', function($scope, sessionFactory, usersFactor
          $location.url('/dashboard')
       }
    });
-
-   //  $scope.login = function(){
-   //      sessionFactory.login($scope.loginUser)
-   //  }
+/* LOCKDOWN + + + + + + + + + + + + + + +  */
 
     $scope.login = function(){
         sessionFactory.login($scope.loginUser,
-           function(data){ // callback
+           function(data){
              console.log("Client session controller recieved back: ",data);
              if (data.data.errors){
-                // TODO SHOW THE ERRORS ON THE PAGE
-               console.log('here!',data.data.errors);
                $scope.errors = data.data.errors;
                alert('Login failed! ' + data.data.errors.login_reg.message);
              }else{
@@ -31,9 +32,6 @@ app.controller('sessionController', function($scope, sessionFactory, usersFactor
            }
         )
     }
-
-    $scope.user = {};
-    $scope.errors = [];
 
     $scope.addUser = function(){
        $scope.errors = [];
