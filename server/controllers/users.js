@@ -131,6 +131,9 @@ create: function (req, res){
             res.json(err);
          }else{
             //console.log('New USER Added to db!', newUser);
+            // 'login' the new user
+            req.session.user = newUser;
+            req.session.save();
             res.json(newUser);
          }
       })

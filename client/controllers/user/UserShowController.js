@@ -6,10 +6,13 @@ function(usersFactory, sessionFactory, $location, rParams) {
    /* LOCKDOWN + + + + + + + + + + + + + +  */
       _this.cur_user = null;
       sessionFactory.getCurUser(function(data){
+         console.log('getCurUser',data);
          if(typeof(data.data) == 'string'){
+             console.log('its a string! there is not a logged in user!');
              $location.path('/dashboard');
             }else{
-               _this.cur_user = data;
+               console.log('there is a logged in user!');
+               _this.cur_user = data.data;
             }
       });
    /* end LOCKDOWN + + + + + + + + + + + + + +  */

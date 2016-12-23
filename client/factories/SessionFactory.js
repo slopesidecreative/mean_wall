@@ -8,10 +8,10 @@ app.factory('sessionFactory', function($http, $location){
       // this doesn't persist if there is a hard refresh, but does save a call
       // to the database when navigating inside the site.
       if (curUser._id){
-         //console.log('there is a current user, just return it.',curUser._id);
+         console.log('there is a current user, just return it.',curUser._id);
          callback( {data:{ data: {curUser}}} );
       }else{
-         //console.log('there isnt one so get a user......');
+         console.log('there isnt one so get a user......');
          $http.get('/getcuruser').then(function(output){
             curUser = output.data;
             //console.log('curUser set in FACToRY',curUser);

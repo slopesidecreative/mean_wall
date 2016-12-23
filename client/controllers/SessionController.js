@@ -60,6 +60,7 @@ app.controller('sessionController', function($scope, sessionFactory, usersFactor
                   }
                }
           }
+          console.log('new user errors: ',$scope.errors);
           // - if no errors, the user has been created
           if($scope.errors.length == 0){
              $scope.user = {};
