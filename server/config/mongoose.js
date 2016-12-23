@@ -3,7 +3,7 @@ console.log('mongo connection, mongoose setup js loaded...');
 var mongoose      =     require('mongoose');
 var fs            =     require('fs');
 var path          =     require('path');
-var dburi         =     'mongodb://localhost/m_friends';
+var dburi         =     'mongodb://localhost/m_wall';
 var root          =     __dirname;
 var models_path   =     path.join(root, './../models');
 var reg           =     new RegExp( ".js$", "i" );
