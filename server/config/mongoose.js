@@ -1,9 +1,9 @@
-console.log('mongo connection, mongoose setup js loaded...');
+console.log('mongoose.js loading..');
 
 var mongoose      =     require('mongoose');
 var fs            =     require('fs');
 var path          =     require('path');
-var dburi         =     'mongodb://localhost/m_wall';
+var dburi         =     'mongodb://localhost/m_wall2';
 var root          =     __dirname;
 var models_path   =     path.join(root, './../models');
 var reg           =     new RegExp( ".js$", "i" );
@@ -49,11 +49,3 @@ fs.readdirSync( models_path ).forEach( function( file ) {
     require( path.join( models_path, file ) );
   }
 });
-
-// previous method:
-// read all of the files in the models_path and require (run) each of the javascript files
-// fs.readdirSync(models_path).forEach(function(file) {
-//   if(file.indexOf('.js') >= 0) {
-//     require(models_path + '/' + file);
-//   }
-// })

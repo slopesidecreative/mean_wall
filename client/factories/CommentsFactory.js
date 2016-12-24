@@ -5,11 +5,11 @@ app.factory('commentsFactory', function($http, $location){
 
     factory.create = function(id, newcomment,callback){
       console.log('CLIENT COMMENT FACTORY - MAKING NEW....', newcomment);
-      // check to be sure there is a name and some content
-      // if(!newpost.postedby.length > 2 || !newpost.content.length > 2){
-      //     alert('Must enter a name and a post!');
-      //     $location.path('/message');
-      // } else {
+      //check to be sure there is a name and some content
+      if(!newcomment.commentby.length > 2 || !newcomment.content.length > 2){
+          alert('Must enter a name and a post!');
+          $location.path('/message');
+      } else {
       newcomment.post_id = id;
 
       ///messages/posts/:id/comments'
@@ -19,7 +19,7 @@ app.factory('commentsFactory', function($http, $location){
               callback(returned_data.data);
             }
           });
-      //}
+      }
     };
 
     return factory;

@@ -8,9 +8,9 @@ let session = require('../controllers/session.js');
 var Users =  require('../controllers/users.js');
 //console.log('Users conroller: ', Users);
 var Posts =  require('../controllers/posts.js');
-//console.log('Users conroller: ', Users);
+//console.log('Posts conroller: ', Posts);
 var Comments =  require('../controllers/comments.js');
-//console.log('Users conroller: ', Users);
+//console.log('Comments conroller: ', Comments);
 
 
 module.exports = function(app) {
