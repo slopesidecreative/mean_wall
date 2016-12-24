@@ -44,13 +44,13 @@ $scope.addPost = function(){
    });
 }
 
-// var index = function() {
-//    console.log('index controller -> index() called to kick things off...');
-//
-//     usersFactory.index(function beingPassedToTheFactoryIndexByThisController(usersFromTheFactory) {
-//      $scope.users = usersFromTheFactory;
-//     });
-// }
+var index = function() {
+   console.log('messages index controller -> index() called to kick things off...');
+
+    postsFactory.index(function handleReturnedPosts(posts) {
+      $scope.posts = posts;
+    });
+}
 // /* USERS + + + + + + + + + + + + + + + + + + + + + + + + + + +  */
 //
 // $scope.deleteUser = function(_id){
@@ -70,6 +70,6 @@ $scope.addPost = function(){
 
 /* INIT   + + + + + + + + + + + + + + + + + + + + + + + + + + +  */
 console.log("loading the messages controller...");
-//index();
+index();
 
 }]);

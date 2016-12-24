@@ -17,8 +17,8 @@ index: function (req, res){
       .populate('comments')
       .exec(function(err, data) {
         console.log('it executed',data);
-        // TODO: RETURN JSON DATA TO ANGULAR
-         res.render('index', {posts: data, moment:moment});
+         //res.render('index', {posts: data, moment:moment});
+         res.json(data);
       });
 },
 /* POST "/messages"
@@ -33,7 +33,7 @@ create: function(req,res){
    post.save(function(err,newpost){
       if(err){
          console.log('error',err);
-         // TODO: RETURN JSON DATA TO ANGULAR
+         // TODO: RETURN JSON ERROR DATA TO ANGULAR
          res.render('index', {title: 'you have errors!', errors: post.errors})
       }else{
          console.log('YEAH! POST: ',newpost);

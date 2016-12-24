@@ -1,5 +1,18 @@
 app.factory('postsFactory', function($http, $location){
     let factory = {};
+    var posts; 
+
+    factory.index = function(callback){
+      //call this method if you want to update or set the friends variable
+      $http.get('/messages').then(function(returned_data){
+        //console.log('users factory - get users: ', returned_data.data);
+        posts = returned_data.data;
+        callback(posts);
+      });
+   };
+
+
+
 
     factory.create = function(newpost,callback){
       console.log('CLIENT POSTS FACTORY - MAKING NEW....',newpost);

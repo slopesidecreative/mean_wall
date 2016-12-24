@@ -36,12 +36,11 @@
          <hr/>
          <h3>Our Posts:</h3>
          <hr/>
-         <% for(post in posts){ %>
-         <ul style='list-style:none;'>
+         <ul style='list-style:none;' ng-repeat="post in posts">
             <!-- <li><%= posts[post]._id %></li> -->
-            <li style="font-size: 1.5em;font-weight:bold;font-style:italic;">"<%= posts[post].content %>"</li>
-            <li style="padding-left:30px;">- <%= posts[post].name %></li>
-            <li style="padding-left:30px; padding-bottom:30px;">- <%= moment(posts[post].created_at).format('Do MMMM, YYYY'); %></li>
+            <li style="font-size: 1.5em;font-weight:bold;font-style:italic;">"{{ post.content }}"</li>
+            <li style="padding-left:30px;">- {{ post.postedby }}</li>
+            <li style="padding-left:30px; padding-bottom:30px;">- {{ post.created_at }}</li>
             <% if(posts[post].comments.length>0){ %>
                <h4>Comments:</h4>
                <table>
