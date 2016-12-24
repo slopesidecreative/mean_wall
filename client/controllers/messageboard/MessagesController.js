@@ -1,8 +1,10 @@
-app.controller('messagesController', ['$scope','postsFactory','sessionFactory', '$location','moment',
-function($scope, postsFactory, sessionFactory, $location, moment) {
+app.controller('messagesController', ['$scope','postsFactory','commentsFactory','sessionFactory', '$location','moment',
+function($scope, postsFactory, commentsFactory, sessionFactory, $location, moment) {
 
 /* LOCKDOWN + + + + + + + + + + + + + +  */
    $scope.cur_user = null;
+   $scope.newComment = {};
+
    sessionFactory.getCurUser(function(data){
       //console.log('returned to client MESSAGES controller',data);
       if(typeof(data.data) == 'string'){
@@ -39,6 +41,37 @@ $scope.addPost = function(){
       // - if no errors, the post has been created
       if($scope.errors.length == 0){
          $scope.newPost = {};
+         $location.path("/messages");
+      }
+   });
+}
+
+$scope.addComment = function(id){
+   $scope.errors = [];
+   console.log('CREATE THIS COMMENT: ', id);
+   commentsFactory.create( id, $scope.newComment, function newCommentCreatedNowRedirect(newcomment){
+      //console.log('USER created and recd by new user controller -> redirect coming...', newUser);
+
+      // HANDLE ERRORS
+      // - check for all other validations
+      if ( newcomment.hasOwnProperty('errors') ) {
+           for (var key in newcomment.errors) {
+              if (newcomment.errors.hasOwnProperty(key)) {
+                 var obj = newcomment.errors[key];
+                 for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop) && prop == 'message') {
+                        //alert(obj[prop]);
+                        console.log(obj[prop]);
+                        $scope.errors.push(obj[prop]);
+                    }
+                 }
+              }
+           }
+      }
+      console.log('new post errors: ',$scope.errors);
+      // - if no errors, the post has been created
+      if($scope.errors.length == 0){
+         $scope.newcomment = {};
          $location.path("/messages");
       }
    });

@@ -9,6 +9,8 @@ var Users =  require('../controllers/users.js');
 //console.log('Users conroller: ', Users);
 var Posts =  require('../controllers/posts.js');
 //console.log('Users conroller: ', Users);
+var Comments =  require('../controllers/comments.js');
+//console.log('Users conroller: ', Users);
 
 
 module.exports = function(app) {
@@ -94,7 +96,7 @@ module.exports = function(app) {
          Create a new COMMENT based on form submission.
       */
       app.post('/messages/posts/:id/comments', function (req, res){
-         console.log('Create COMMENT ',req.body);
+         console.log('SERVER!! Create COMMENT ',req.body);
          Comments.create(req,res);
       });
 

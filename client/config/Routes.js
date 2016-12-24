@@ -30,8 +30,7 @@ app.config(function($routeProvider) {
 /* MESSAGES   ----------------------------- */
    .when('/messages', {
      templateUrl: '/partials/messages.html',
-     controller: 'messagesController',
-     controllerAs: 'mC'
+     controller: 'messagesController'
    })
 
 /* DEFAULT -------------------------------- */

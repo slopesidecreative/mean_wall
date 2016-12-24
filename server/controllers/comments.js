@@ -10,11 +10,12 @@ module.exports = {
 /* POST "/messages/posts/:id/comments"
    Create a new POST based on form submission.
 */
-create: function(res,req){
+create: function(req,res){
+   console.log('got!!',req.params);
    Posts.findOne({_id: req.params.id}, function(err, post){
-    var comment = new Comment({
+    var comment = new Comments({
         _post: req.params.id,
-        name: req.body.name,
+        commentby: req.body.commentby,
         content: req.body.content
     });
 

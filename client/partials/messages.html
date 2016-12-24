@@ -17,7 +17,7 @@
    <div class="col-xs-8 col-md-8">
       <h3>Add Post:</h3>
       <!-- <form id="post" action="/" method="post"> -->
-      <form>
+      <form name="post">
          <label for="name">Name:</label><br/>
          <input type="text" name="name" ng-model="newPost.postedby"><br/>
          <label for="content">Post:</label><br/>
@@ -29,7 +29,7 @@
 </div>
 
 <!-- SHOW POSTS AND COMMENTS -->
-<% if(typeof posts == 'object' && posts){ %>
+
 <div class="row">
    <div class="col-xs-2 col-md-2"></div>
    <div class="col-xs-8 col-md-8">
@@ -41,57 +41,56 @@
             <li style="font-size: 1.5em;font-weight:bold;font-style:italic;">"{{ post.content }}"</li>
             <li style="padding-left:30px;">- {{ post.postedby }}</li>
             <li style="padding-left:30px; padding-bottom:30px;">- {{ post.created_at }}</li>
-            <% if(posts[post].comments.length>0){ %>
                <h4>Comments:</h4>
-               <table>
-               <% for(i=0;i<posts[post].comments.length;i++){ %>
-                  <tr>
-                  <td><%= posts[post].comments[i].content %></td>
+               <table class="table table-striped">
+                  <tr ng-repeat="comment in post.comments">
+                     <td>{{comment.content}}</td>
                   </tr>
                   <tr>
-                  <td><%= posts[post].comments[i].name %></td>
+                     <td>{{comment.postedby}}</td>
                   </tr>
                   <tr>
                      <td><hr/></td>
                   </tr>
-               <% } %>
                </table>
-            <% } %>
             <h4>Add A Comment:</h4>
-            <form action="/posts/<%= posts[post]._id %>/comments" method="post" style="padding-bottom: 20px;">
+
+            <!-- <form style="padding-bottom: 20px;">
                <label for="name">Name</label><br/>
-               <input type="text" name="name"><br/>
+               <input type="text" name="name" ng-model="newComment.contentcommentby"><br/>
                <label for="content">Comment</label><br/>
-               <textarea rows="4" cols="40" name="content"></textarea><br/>
-               <input type="hidden" name="post_id" value="<%= posts[post]._id %>">
-               <button type="submit">Add Comment</button>
+               <textarea rows="4" cols="40" name="content" ng-model="newComment.commentcontent"></textarea><br/>
+               <input type="hidden" name="post_id" value="{{post._id}}">
+               <button type="submit" ng-click="addComment()">Add Comment</button>
+            </form> -->
+            <form name="comment">
+               <label for="name">Name:</label><br/>
+               <input type="text" name="name" ng-model="newComment.commentby"><br/>
+               <label for="content">Comment:</label><br/>
+               <textarea name="content" rows="4" cols="40" ng-model="newComment.content"></textarea><br/>
+               <!-- <input type="text" name="post_id" ng-model="newComment.post_id" value="{{post._id}}" ng-init="post._id">{{post._id}}<br/> -->
+               <button type='submit' ng-click="addComment(post._id)">Add New Comment</button>
             </form>
          </ul>
          <hr/>
-         <% } %>
    </div>
    <div class="col-xs-2 col-md-2"></div>
 </div>
-<% } %>
 
 <!-- ERRORS, if there are any.... -->
-<% if(typeof errors == 'object' && errors){ %>
 <div class="row">
    <div class="col-md-2"></div>
    <div class="col-md-8">
-      <h3>Our ERRORS!</h3>
+      <h3>ERRORS!</h3>
       <ul style='list-style:none;'>
-         <% for(error in errors){ %>
-         <li><%= errors[error].stack %></li>
+         <li ng-repeat="error in errors">{{error}}</li>
          <hr/>
          <br/>
-         <% } %>
          <hr/>
       </ul>
    </div>
    <div class="col-md-2"></div>
 </div>
-<% }%>
 
 </div> <!-- /container -->
 </div> <!-- /wrap -->

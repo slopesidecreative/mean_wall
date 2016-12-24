@@ -37,7 +37,7 @@ var validate = require('mongoose-validator');
          type: mongoose.Schema.Types.ObjectId,
          ref: 'Post'
       },
-     name: {
+     commentby: {
         type: String,
         required: true,
         validate: nameValidator
