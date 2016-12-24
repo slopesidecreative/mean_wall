@@ -70,44 +70,48 @@ module.exports = function(app) {
          Users.delete(req,res);
       });
 
-/* FRIENDS --------------------------------------------------- */
-   //
-   // // GET /friends
-   // // returns all friends
-   // app.get('/friends', function (req, res){
-   //    console.log(' GET index /  ');
-   //    Friends.index(req,res);
-   // });
-   // /* GET /friends/:id
-   //    Show: view a single friend by ID.
-   // */
-   // app.get('/friends/:id', function (req, res){
-   //    console.log('GET show /friends/:id ', req.params.id);
-   //    Friends.show(req,res);
-   // });
-   // /* POST
-   //    /items
-   //    Create a new item based on form submission.
-   // */
-   // app.post('/friends', function (req, res){
-   //    console.log('POST create /friends');
-   //    Friends.create(req,res);
-   // });
-   // /*
-   //    POST /items/:id
-   //    PUT: process editing a friend by ID.
-   // */
-   // app.put('/friends/:id', function (req, res){
-   //    console.log('PUT PUT PUT update!!');
-   //    Friends.update(req,res);
-   // });
-   // /*
-   //    DELETE /friends/:id
-   //    Delete: process deleting a friend by ID.
-   // */
-   // app.delete('/friends/:id', function (req, res){
-   //    console.log('DELETE /friends/:id');
-   //    Friends.delete(req,res);
-   // });
+/* MESSAGE BOARD ------------------------------------------------ */
 
-}
+      // GET "/messages"
+      // Root - show all
+      app.get('/messages', function (req, res){
+         console.log(' GET messages index /messages  ');
+         Posts.index(req,res);
+      });
+
+      /* POST "/messages"
+         Create a new POST based on form submission.
+      */
+      app.post('/messages', function (req, res){
+         console.log(' POST messages create /messages  ');
+         Posts.create(req,res);
+      });
+
+      /* POST "/messages/posts/:id/comments"
+         Create a new COMMENT based on form submission.
+      */
+      app.post('/messages/posts/:id/comments', function (req, res){
+         console.log('Create COMMENT ',req.body);
+         Comments.create(req,res);
+      });
+
+      // Extra route for development
+      // app.get('/messages/:id', function (req, res){
+      //    console.log('Show a message by ID.');
+      //     Post.findOne({_id: req.params.id})
+      //      .populate('comments')
+      //      .exec(function(err, post) {
+      //           res.render('index', {posts: {post}, moment:moment});
+      //             });
+      // });
+      // Extra route for development
+      // app.get('/messages/posts/:id', function (req, res){
+      //    console.log('Show a post by ID');
+      //     Post.findOne({_id: req.params.id})
+      //      .populate('comments')
+      //      .exec(function(err, post) {
+      //           res.render('index', {posts: {post}});
+      //             });
+      // });
+
+} // CLOSES EXPORTS

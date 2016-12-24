@@ -6,6 +6,7 @@ var port          =  process.env.PORT || 8000;
 var path          =  require( 'path' );
 var root          =  __dirname;
 var session       =  require('express-session');
+var bodyParser    =  require('body-parser');
 
 app.use(session({
     secret: 'keyboard cat',
@@ -14,6 +15,9 @@ app.use(session({
 }));
 
 app.use(bp.json());
+
+// for parsing the POST body
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(root + '/client/'));
 app.use(express.static(root + '/client/static/'));

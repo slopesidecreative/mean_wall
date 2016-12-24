@@ -27,22 +27,13 @@ app.config(function($routeProvider) {
      controller: 'userNewController',
      controllerAs: 'nC'
    })
-/* FRIENDS -------------------------------- */
-    .when('/friends/:id/edit/', {
-      templateUrl: '/partials/friendEdit.html',
-      controller: 'editController',
-      controllerAs: 'eC'
-    })
-    .when('/friends/:id', {
-      templateUrl: '/partials/friendShow.html',
-      controller: 'showController',
-      controllerAs: 'sC'
-    })
-    .when('/new/friend', {
-      templateUrl: '/partials/friendNew.html',
-      controller: 'newController',
-      controllerAs: 'nC'
-    })
+/* MESSAGES   ----------------------------- */
+   .when('/messages', {
+     templateUrl: '/partials/messages.html',
+     controller: 'messagesController',
+     controllerAs: 'mC'
+   })
+
 /* DEFAULT -------------------------------- */
     .otherwise({
       redirectTo: '/dashboard'
