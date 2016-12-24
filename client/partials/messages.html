@@ -44,10 +44,10 @@
                <h4>Comments:</h4>
                <table class="table table-striped">
                   <tr ng-repeat="comment in post.comments">
-                     <td>{{comment.content}}</td>
+                     <td>{{comment.content}} | {{comment.commentby}}</td>
                   </tr>
                   <tr>
-                     <td>{{comment.postedby}}</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td><hr/></td>
