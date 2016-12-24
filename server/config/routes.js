@@ -7,6 +7,9 @@ let session = require('../controllers/session.js');
 //console.log('session conroller: ', session);
 var Users =  require('../controllers/users.js');
 //console.log('Users conroller: ', Users);
+var Posts =  require('../controllers/posts.js');
+//console.log('Users conroller: ', Users);
+
 
 module.exports = function(app) {
 

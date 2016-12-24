@@ -20,25 +20,9 @@ app.factory('sessionFactory', function($http, $location){
       }
     }
 
-   //  factory.login = function(user,callback){
-   //      $http.post('/login', user).then(function(output){
-   //      //console.log('client session factory we got this: ', output);
-   //      //console.log('output.data.status',output.data.status);
-   //       if(output.data.status){
-   //           $location.url('/index');
-   //       }
-   //      })
-   //  }
-
     factory.login = function(user,callback,errback){
         $http.post('/login', user).then(callback,errback);
     }
-
-   //  this.login = function(data,callback,errback){
-   //    $http.post('/login',data).then(callback,errback);
-   //  }
-
-
 
     return factory;
 })

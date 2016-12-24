@@ -1,5 +1,5 @@
-app.controller('messagesController', ['$scope','usersFactory','sessionFactory', '$location','moment',
-function($scope, usersFactory, sessionFactory, $location, moment) {
+app.controller('messagesController', ['$scope','postsFactory','sessionFactory', '$location','moment',
+function($scope, postsFactory, sessionFactory, $location, moment) {
 
 /* LOCKDOWN + + + + + + + + + + + + + +  */
    $scope.cur_user = null;
@@ -13,7 +13,36 @@ function($scope, usersFactory, sessionFactory, $location, moment) {
    });
 /* end LOCKDOWN + + + + + + + + + + + + + +  */
 
-$scope.user = {};
+$scope.addPost = function(){
+   $scope.errors = [];
+   console.log('$ CREATE THIS POST: ', $scope.newPost);
+   postsFactory.create( $scope.newPost, function newPostCreatedNowRedirect(newPost){
+      //console.log('USER created and recd by new user controller -> redirect coming...', newUser);
+
+      // HANDLE ERRORS
+      // - check for all other validations
+      if ( newPost.hasOwnProperty('errors') ) {
+           for (var key in newPost.errors) {
+              if (newPost.errors.hasOwnProperty(key)) {
+                 var obj = newPost.errors[key];
+                 for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop) && prop == 'message') {
+                        //alert(obj[prop]);
+                        console.log(obj[prop]);
+                        $scope.errors.push(obj[prop]);
+                    }
+                 }
+              }
+           }
+      }
+      console.log('new post errors: ',$scope.errors);
+      // - if no errors, the post has been created
+      if($scope.errors.length == 0){
+         $scope.newPost = {};
+         $location.path("/messages");
+      }
+   });
+}
 
 // var index = function() {
 //    console.log('index controller -> index() called to kick things off...');

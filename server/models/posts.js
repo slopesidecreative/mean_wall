@@ -34,10 +34,9 @@ var postValidator = [
    var Schema = mongoose.Schema;
 
    var PostSchema = new mongoose.Schema({
-     name: {
+     postedby: {
         type: String,
-        required: true,
-        validate: nameValidator
+        required: true
      },
      content: {
         type: String,

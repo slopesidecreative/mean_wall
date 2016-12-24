@@ -25,18 +25,19 @@ index: function (req, res){
    Create a new POST based on form submission.
 */
 create: function(req,res){
-   console.log('Create POST: action. Post: ',req.body.content);
-   var post = new Post({
-      name: req.body.name,
+   console.log('Create POST: action. Post: ',req.body);
+   var post = new Posts({
+      postedby: req.body.postedby,
       content: req.body.content
    });
-   post.save(function(err){
+   post.save(function(err,newpost){
       if(err){
          console.log('error',err);
          // TODO: RETURN JSON DATA TO ANGULAR
          res.render('index', {title: 'you have errors!', errors: post.errors})
       }else{
-         res.redirect('/');
+         console.log('YEAH! POST: ',newpost);
+         res.json(newpost);
       }
    })
 }
