@@ -1,4 +1,4 @@
-/* friends controller */
+/* users controller */
 console.log('USERS controller');
 
 var mongoose   =  require('mongoose');

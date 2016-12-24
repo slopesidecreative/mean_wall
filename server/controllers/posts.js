@@ -32,9 +32,19 @@ create: function(req,res){
    });
    post.save(function(err,newpost){
       if(err){
-         console.log('error',err);
-         // TODO: RETURN JSON ERROR DATA TO ANGULAR
-         res.render('index', {title: 'you have errors!', errors: post.errors})
+         //console.log('error',err);
+         //res.render('index', {title: 'you have errors!', errors: post.errors})
+         res.json({
+               errors: {
+                    users: {
+                        message: "Could not create comment!",
+                        kind: "what didn't work",
+                        path: "reference to the schema's name",
+                        value: "cause of the initial error"
+                    }
+               },
+               name: "Server error"
+            });
       }else{
          console.log('YEAH! POST: ',newpost);
          res.json(newpost);

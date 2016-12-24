@@ -19,19 +19,39 @@ create: function(req,res){
         content: req.body.content
     });
 
-    comment.save(function(err){
+    comment.save(function(err,newcomment){
+      //console.log('YEAH - GOT THE RETURNED NEW COMMENT', newcomment);
         if(err){
-           console.log('error',err);
-           res.render('index', {title: 'you have errors!', errors: err})
+           //console.log('error',err);
+           //res.render('index', {title: 'you have errors!', errors: err})
+           res.json({
+                  errors: {
+                       comments: {
+                           message: "Could not create comment!",
+                           kind: "what didn't work",
+                           path: "reference to the schema's name",
+                           value: "cause of the initial error"
+                       }
+                  },
+                  name: "Server error"
+               });
         }else{
            post.comments.push(comment);
            post.save(function(err){
              if(err){
-                // TODO: SEND TO ANGULAR
-                res.render('index', {title: 'you have errors!', errors: post.errors})
+                res.json({
+                      errors: {
+                           users: {
+                               message: "Could not create comment!",
+                               kind: "what didn't work",
+                               path: "reference to the schema's name",
+                               value: "cause of the initial error"
+                           }
+                      },
+                      name: "Server error"
+                   });
              }else{
-                // TODO: SEND TO ANGULAR
-                res.redirect('/');
+                res.json(newcomment);
              }
          })
         }

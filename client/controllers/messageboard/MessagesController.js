@@ -4,6 +4,7 @@ function($scope, postsFactory, commentsFactory, sessionFactory, $location, momen
 /* LOCKDOWN + + + + + + + + + + + + + +  */
    $scope.cur_user = null;
    $scope.newComment = {};
+   $scope.newPost = {};
 
    sessionFactory.getCurUser(function(data){
       //console.log('returned to client MESSAGES controller',data);
@@ -36,12 +37,14 @@ $scope.addPost = function(){
                  }
               }
            }
+           $scope.newComment = {};
+           $scope.newPost = {};
       }
       console.log('new post errors: ',$scope.errors);
       // - if no errors, the post has been created
       if($scope.errors.length == 0){
-         $scope.newPost = {};
-         $location.path("/messages");
+         index();
+         //$location.path("/messages");
       }
    });
 }
@@ -67,19 +70,23 @@ $scope.addComment = function(id){
                  }
               }
            }
+           $scope.newComment = {};
+           $scope.newPost = {};
       }
       console.log('new post errors: ',$scope.errors);
       // - if no errors, the post has been created
       if($scope.errors.length == 0){
-         $scope.newcomment = {};
-         $location.path("/messages");
+         //$location.path("/messages");
+         index();
       }
    });
 }
 
 var index = function() {
    console.log('messages index controller -> index() called to kick things off...');
-
+   $scope.newComment = {};
+   $scope.newPost = {};
+   
     postsFactory.index(function handleReturnedPosts(posts) {
       $scope.posts = posts;
     });
